@@ -1,20 +1,32 @@
 ---
-title: Hello World
-description: Welcome to Hugo Theme Stack
+title: Hello World (duh)
+description: Here we go
 slug: hello-world
-date: 2022-03-06 00:00:00+0000
+date: 2023-10-09 00:00:00+0000
 image: cover.jpg
 categories:
-    - Example Category
-tags:
-    - Example Tag
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
+    - Personal
 ---
 
-Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
+I am Serkan. 
 
-For more information about this theme, check the documentation: https://stack.jimmycai.com/
+I hold a PhD in large scale mathematical optimization and I have 10+ years of experience in building optimizer tools in different settings. 
 
-Want a site like this? Check out [hugo-theme-stack-stater](https://github.com/CaiJimmy/hugo-theme-stack-starter)
+I have always wanted to start writing about various things I observe and have an opinion on.
+In most cases, these topics are about mathematical optimization, which luckily one of my  -_numerous_- passions but also my job (🤑).
 
-> Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
+I have worked in a handful of companies ranging from online retailers (💈) to airlines (✈️) and
+to consultancy (👔) and software product companies (🖥️). 
+
+I enjoy cracking tough problems
+with mathematical optimization (🧮) by enabling smart decision making.
+I also have interest in software engineering (⌨️). 
+
+Data scientists are usually focused
+on getting things done (🎯), _which makes sense_. However, the peace of mind that software craftsmanship (🛠️) 
+provides when developing an algorithm or modeling a problem is what you need
+to unlock the potential. And the creativity (💡) and/or _deep work_ is what you need, if you want to _solve_ a hard problem. 
+
+(Will definitely write a post about what _solving a problem_ means, imho of course).
+
+Stay tuned! 🧑🏻‍💻🏃🏻‍♂️
