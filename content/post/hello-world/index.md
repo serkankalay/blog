@@ -12,6 +12,7 @@ I am Serkan.
 
 I have always wanted to start writing about various things I observe, am curious about and/or have an opinion on.
 In most cases, these topics are about mathematical optimization, which luckily one of my  -_numerous_- passions but also my job (🤑).
+I am also interested in aviation, food and pretty anything that is _smart_.
 
 I have worked in a handful of companies ranging from airlines (✈️) to online retailers (💈), and from
 consultancy (👔) to software product companies (🖥️). 
@@ -26,10 +27,10 @@ I also have interest in software engineering (⌨️).
 Data scientists are usually focused
 on getting things done (🎯), _which makes sense_. However, when developing an algorithm or modeling a problem,
 on top of technical knowledge, a data scientist needs to rely on creativity (💡) and capability to _think differently_.
-The peace of mind that software craftsmanship (🛠️) provides is hence something you need to _solve_ a problem.
+The peace of mind that software craftsmanship (🛠️) provides is hence something you need, to _solve_ a problem.
 (Will definitely write a post about what _solving a problem_ means, imho of course).
 
-I am planning to start with a cadence of at least 1 post per month, aiming for a sustainable output rate.
+I am planning to start with a frequency of at least 1 post per month, aiming for a sustainable output rate.
 I understand that content creation is a very sophisticated task, requiring high level of enthusiasm and discipline.
 Well, I believe I just challenged myself into it 😁
 
