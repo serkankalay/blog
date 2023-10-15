@@ -18,4 +18,4 @@ menu:
 comments: false
 ---
 
-Acknowledging some resources used and links to some resources I find useful.
+Acknowledging some resources used and links to others I find useful.
