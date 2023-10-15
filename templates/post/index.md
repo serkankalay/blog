@@ -2,7 +2,7 @@
 title: 👋 Hey there
 description: Here's a new post.
 slug: template
-date: 2023-10-14 00:00:00+0000
+date: HERE_IS_A_DATE
 image: header.jpg
 categories:
     - Personal
