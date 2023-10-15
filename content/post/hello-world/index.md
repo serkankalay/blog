@@ -3,7 +3,7 @@ title: 👋 Hello World (duh)
 description: Brief story of who I am and what my writings will offer.
 slug: hello-world
 date: 2023-10-09 00:00:00+0000
-image: sweet-spot.png
+image: header.png
 categories:
     - Personal
 ---
