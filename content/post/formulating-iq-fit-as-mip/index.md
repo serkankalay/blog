@@ -2,7 +2,7 @@
 title: 🧩 Formulating a game as MIP
 description: Fun practice of formulating IQ Fit as a mathematical model.
 slug: formulating-iq-fit-as-mip
-date: 2023-10-18 06:25:15+0000
+date: 2023-11-18 06:25:15+0000
 image: header.jpeg
 categories:
     - Modeling
@@ -61,7 +61,7 @@ Raf Peeters provides a beautfiul representation of the pieces as:
 ![](https://www.smartgamesandpuzzles.com/images/iq-fit_puzzle_pieces-874.jpg)
 
 This representation is, however, incomplete for our purposes since it misses the orientation of the side.
-Let's take the first side of the dark blue piece for instance. You can place it on the board in 4 different orientations:
+Let's take a side of the dark blue piece for instance. You can place it on the board in 4 different orientations:
 
 ![](dark-blue-orientations.png)
 
