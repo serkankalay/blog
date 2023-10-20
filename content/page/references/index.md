@@ -9,6 +9,10 @@ links:
     description: Image by catalyststuff on Freepik
     website: https://www.freepik.com/free-vector/cute-brain-with-science-formula-cartoon-vector-icon-illustration-people-education-icon-isolated_58928633.htm#query=mathematics&position=31&from_view=search&track=sph
     image: https://img.freepik.com/free-vector/cute-brain-with-science-formula-cartoon-vector-icon-illustration-people-education-icon-isolated_138676-9061.jpg?w=1380&t=st=1697371806~exp=1697372406~hmac=bec58bf95c50f2b50bfea57e298eccb15d198ff5f368bf7f1246d13624c03e7e
+  - title: Blog post from Raf Peeters on IQ Fit puzzle game.
+    description: The designer of the game explains it very elegantly.
+    website: https://www.smartgamesandpuzzles.com/iq-fit.html
+    image: https://www.smartgamesandpuzzles.com/images/sg-423-iq-fit-atmosphere--1280.jpg
 menu:
     main: 
         weight: 4
