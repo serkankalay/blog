@@ -2,7 +2,7 @@
 title: 🧩 Formulating a game as MIP
 description: Fun practice of formulating IQ Fit as a mathematical model.
 slug: formulating-iq-fit-as-mip
-date: 2023-11-18 06:25:15+0000
+date: 2023-10-18 06:25:15+0000
 image: header.jpeg
 categories:
     - Modeling
@@ -67,14 +67,37 @@ Let's take a side of the dark blue piece for instance. You can place it on the b
 
 ### Variables
 The player chooses one side and one orientation to place on the board for each piece.
-Let $C$ be the set of colors and $O$ be the set of combinations of a side and orientation. 
-Then $(c,o)$ will represent a certain color, side and orientation. Let's call a $(c,a)$ an option.
+Let $C$ be the set of colors and $O$ be the exhaustive set of combinations of a side and orientation for each color.
+Then $o(c)$ will represent a certain color, side and orientation. Let's call $o(c)$ an option of color $c$.
 
-To represent placement of a piece on the board, we need a reference point of the $(c,a)$, namely the option.
-Every other _ball_ or _point_ of this option, we can express relatively. Then the decision is: **_"where the reference point
-of the option will be placed in the board"_**.
+To represent placement of a piece on the board, let's first determine the way we represent the board itself.
+It consists of 50 holes, shaped as a 5 by 10 matrix. Intuitively, we can represent each hole as a point, $(x,y)$.
+Let's denote the bottom left as $(0,0)$, namely the origin.
 
-TODO
+![](board.png)
+
+Our task is to place the pieces onto the board. 
+For that, having a reference point of $(c,a)$, namely the option, would be handy.
+We can then relatively express every other _ball_ or _point_ of the option.
+Finally, the decision is: **_"where the reference point
+of the option will be placed in the board"_**. Although, this is intuitive for human intelligence,
+from mathematical point of view, following is even handier: 
+**_"the reference point of the option is placed to $(x,y)$, or not."_**. Then our decision variable is:
+
+$$
+    x_{o(c),p} = 
+    \begin{cases}
+      1 &\text{if $o(c)$ is placed at point $p$} \\\\
+      0 &\text{otherwise }
+    \end{cases}
+$$
+
+Let's circle back to the example above and focus on the placement of the dark blue piece.
+Below image points which _ball_ we assume to be the reference point and its placement at
+$(8,3)$ on the board. Note that it is not possible to place this piece with the same orientation
+at $(8,4)$, since one _ball_ will be out of the board.
+
+![](example-placement.png)
 
 ### Constraints
 
