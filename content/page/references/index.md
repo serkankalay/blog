@@ -13,6 +13,14 @@ links:
     description: The designer of the game explains it very elegantly.
     website: https://www.smartgamesandpuzzles.com/iq-fit.html
     image: https://www.smartgamesandpuzzles.com/images/sg-423-iq-fit-atmosphere--1280.jpg
+  - title: The first mathematical programming blog I've run into.
+    description: A great source for many problems, practices and insights. A true gem.
+    website: http://yetanothermathprogrammingconsultant.blogspot.com
+    image: 
+  - title: Another insightful OR-blog.
+    description: The blog of a former Gurobi-er with intriguing content.
+    website: https://oberdieck.dk
+    image: https://oberdieck.dk/img/oberdieck_hudc69ac9a734566fe0011c40ba565fd9c_390060_300x0_resize_q75_box.jpg
 menu:
     main: 
         weight: 4
