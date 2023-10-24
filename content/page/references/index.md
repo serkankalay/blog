@@ -16,7 +16,7 @@ links:
   - title: The first mathematical programming blog I've run into.
     description: A great source for many problems, practices and insights. A true gem.
     website: http://yetanothermathprogrammingconsultant.blogspot.com
-    image: 
+    image: http://www.amsterdamoptimization.com/pic/AmsterdamDamsquarsmall.jpg
   - title: Another insightful OR-blog.
     description: The blog of a former Gurobi-er with intriguing content.
     website: https://oberdieck.dk
