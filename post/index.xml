@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Dr. Serkan Kalay</title><link>https://serkankalay.github.io/post/</link><description>Recent content in Posts on Dr. Serkan Kalay</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Oct 2023 06:25:15 +0000</lastBuildDate><atom:link href="https://serkankalay.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>🧩 Formulating a game as MIP</title><link>https://serkankalay.github.io/p/formulating-iq-fit-as-mip/</link><pubDate>Wed, 18 Oct 2023 06:25:15 +0000</pubDate><guid>https://serkankalay.github.io/p/formulating-iq-fit-as-mip/</guid><description>&lt;img src="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/header.jpeg" alt="Featured image of post 🧩 Formulating a game as MIP" />&lt;h2 id="tldr">TL;DR&lt;/h2>
+&lt;p>🧩 &lt;a class="link" href="https://smartgames.eu/uk/one-player-games/iq-fit" target="_blank" rel="noopener"
+>IQ Fit&lt;/a> is an award winning 3D puzzle game, which turns out to be a combinatorial problem!&lt;/p>
+&lt;p>🧮 You can formulate it as a MIP, a pure Binary Program to be more precise.&lt;/p>
+&lt;p>👨‍👧 It is more fun to play it with your daughter/son rather than formulating.&lt;/p>
+&lt;h2 id="background">Background&lt;/h2>
+&lt;p>A few weeks ago while walking in a toys shop, my daughter showed us a 3D puzzle game.
+She told us that she plays with it at school and likes it a lot.&lt;/p>
+&lt;p>The idea of the game is, similar to any other puzzle, is pretty straightforward:
+you have pieces, and you have a board that you need to completely fill.
+The catch is, the pieces are 3D but the board is 2D.
+Hence, the player needs to orientate the pieces such that they fill up the board and keep the 2D.&lt;/p>
+&lt;p>I found this fabulous &lt;a class="link" href="iq-fit_example-899.png" >blog post&lt;/a> about the game, by Raf Peeters, the designer,
+where he explains more.&lt;/p>
+&lt;h2 id="understanding-the-game">Understanding the game&lt;/h2>
+&lt;p>Let me summarize the facts about the puzzle:&lt;/p>
+&lt;ul>
+&lt;li>The board has 50 holes, formed as a 5 by 10 matrix&lt;/li>
+&lt;li>There are 10 pieces, each with different color&lt;/li>
+&lt;li>Each piece has 2 &lt;em>usable&lt;/em> sides&lt;/li>
+&lt;li>A challenge is defined by a certain placement of a subset of the pieces and the goal is
+to fill up the board entirely with the remaining ones&lt;/li>
+&lt;/ul>
+&lt;p>Below image shows an example challenge (&lt;em>left&lt;/em>) and its solution (&lt;em>right&lt;/em>):
+&lt;img src="https://www.smartgamesandpuzzles.com/images/iq-fit_example-899.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="modeling">Modeling&lt;/h2>
+&lt;p>As a mathematical optimization practitioner, inevitably I started formulating the game in my mind
+as a &lt;em>mathematical optimization model&lt;/em> while we played it.
+For the general audience, in short:&lt;/p>
+&lt;blockquote>
+&lt;p>Mathematical optimization is the process of finding a &lt;strong>&lt;em>solution&lt;/em>&lt;/strong> to a &lt;strong>&lt;em>problem&lt;/em>&lt;/strong>,
+where the &lt;strong>&lt;em>solution&lt;/em>&lt;/strong> minimizes (or maximizes) a certain &lt;strong>&lt;em>objective&lt;/em>&lt;/strong>.
+A mathematical model represents a problem with &lt;strong>&lt;em>variables&lt;/em>&lt;/strong>
+and &lt;strong>&lt;em>constraints&lt;/em>&lt;/strong>. The former correspond to &lt;em>decisions&lt;/em> while the latter correspond to actual and/or desired limitations.&lt;/p>
+&lt;/blockquote>
+&lt;p>Let&amp;rsquo;s start with defining what our decisions are. A way to look at it is as follows:
+we select one of the remaining pieces and place it to the board in a &lt;em>certain&lt;/em> way.
+As defined above, each piece has 2 &lt;em>usable&lt;/em> sides.
+Raf Peeters provides a beautfiul representation of the pieces as:
+&lt;img src="https://www.smartgamesandpuzzles.com/images/iq-fit_puzzle_pieces-874.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>This representation is, however, incomplete for our purposes since it misses the orientation of the side.
+Let&amp;rsquo;s take a side of the dark blue piece for instance. You can place it on the board in 4 different orientations:&lt;/p>
+&lt;p>&lt;img src="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/dark-blue-orientations.png"
+width="374"
+height="92"
+srcset="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/dark-blue-orientations_hudce923c5b69bcc793589d15e27de45f7_31980_480x0_resize_box_3.png 480w, https://serkankalay.github.io/p/formulating-iq-fit-as-mip/dark-blue-orientations_hudce923c5b69bcc793589d15e27de45f7_31980_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="406"
+data-flex-basis="975px"
+>&lt;/p>
+&lt;h3 id="variables">Variables&lt;/h3>
+&lt;p>The player chooses one side and one orientation to place on the board for each piece.
+Let $C$ be the set of colors and $O$ be the exhaustive set of combinations of a side and orientation for each color.
+Then $o(c)$ will represent a certain color, side and orientation. Let&amp;rsquo;s call $o(c)$ an option of color $c$.&lt;/p>
+&lt;p>To represent placement of a piece on the board, let&amp;rsquo;s first determine the way we represent the board itself.
+It consists of 50 holes, shaped as a 5 by 10 matrix. Intuitively, we can represent each hole as a point, $(x,y)$.
+Let&amp;rsquo;s denote the bottom left as $(0,0)$, namely the origin.&lt;/p>
+&lt;p>&lt;img src="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/board.png"
+width="395"
+height="302"
+srcset="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/board_hu7d16d854305ae069f8c0249d3ed770b8_30561_480x0_resize_box_3.png 480w, https://serkankalay.github.io/p/formulating-iq-fit-as-mip/board_hu7d16d854305ae069f8c0249d3ed770b8_30561_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="313px"
+>&lt;/p>
+&lt;p>Our task is to place the pieces onto the board.
+For that, having a reference point of $o(c)$, namely the option, would be handy.
+We can then relatively express every other &lt;em>ball&lt;/em> or &lt;em>point&lt;/em> of the option.
+Our decision will be: &lt;strong>&lt;em>&amp;ldquo;where the reference point
+of the option will be placed in the board&amp;rdquo;&lt;/em>&lt;/strong>. Although, this is intuitive for human intelligence,
+from mathematical point of view, following is handier:
+&lt;strong>&lt;em>&amp;ldquo;the reference point of the option is placed to $(x,y)$, or not.&amp;rdquo;&lt;/em>&lt;/strong>. Then our decision variable is:&lt;/p>
+&lt;p>$$
+x_{o(c),p} =
+\begin{cases}
+1 &amp;amp;\text{if $o(c)$ is placed at point $p$} \\
+0 &amp;amp;\text{otherwise }
+\end{cases}
+$$&lt;/p>
+&lt;p>Let&amp;rsquo;s circle back to the example above and focus on the placement of the dark blue piece.
+Below image points which &lt;em>ball&lt;/em> we assume to be the reference point and its placement at
+$(8,3)$ on the board. Note that it is not possible to place this piece with the same orientation
+at $(8,4)$, since one &lt;em>ball&lt;/em> will be out of the board.
+&lt;img src="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/example-placement.png"
+width="1211"
+height="364"
+srcset="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/example-placement_hub6bd47daba4c130fdd58440d0e8c2273_158751_480x0_resize_box_3.png 480w, https://serkankalay.github.io/p/formulating-iq-fit-as-mip/example-placement_hub6bd47daba4c130fdd58440d0e8c2273_158751_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="332"
+data-flex-basis="798px"
+>
+To generate exahustive list of options,
+one can determine a reference point for all colors, sides and orientations, enumerate all the points of the board
+and check whether the piece fits in the board entirely.&lt;/p>
+&lt;h3 id="constraints">Constraints&lt;/h3>
+&lt;p>The first rule and the objective of the game is to fill up the board entirely.
+In other words, each point on the board needs to have exactly 1 ball assigned to it.
+Let&amp;rsquo;s define set $(O,P)(p)$ such that if the reference point of orientation $o(c)$ of color $(c)$
+is placed at $p$, then one of the &lt;em>balls&lt;/em> of the piece is filling up point $p$.&lt;/p>
+&lt;p>In the example above, when the reference point of dark blue piece is placed at $(8,3)$,
+following points are filled with dark blue: ${(8,3),(9,3), (9,4), (9,2)}$.
+Then, in order to make sure that all the points in the board are filled,
+we can express the constraint as follows:&lt;/p>
+&lt;p>$$
+\sum_{o(c), p&amp;rsquo; \in (O,P)(p))} x_{o(c),p&amp;rsquo;} = 1 \quad \forall p
+$$&lt;/p>
+&lt;p>Constraints are elements of a mathematical model that determines whether a solution is feasible.
+However, counter intuitively, we also need to express the &lt;em>physical&lt;/em> restrictions as well.
+Anyone playing this game knows by heart that he/she needs to use each piece exactly once.
+Below constraint expresses the same thing, only cooler:&lt;/p>
+&lt;p>$$
+\sum_o x_{o(c),p} = 1 \quad \forall c
+$$&lt;/p>
+&lt;h3 id="objective">Objective&lt;/h3>
+&lt;p>Probably the easiest part is the objective: there is &lt;em>none&lt;/em>.
+Since we expressed the objective of filling up the entire board as a constraint, the model becomes a feasibility problem.
+Hence, we can leave it blank:&lt;/p>
+&lt;p>$$
+min \quad 0
+$$&lt;/p>
+&lt;h2 id="how-to-input-a-challenge">How to input a challenge?&lt;/h2>
+&lt;p>A challenge is defined as fixed placement of subset of the pieces. Then inputting a challenge to the model
+means enforcing those selections. Circling back to the example challenge above, to fix the red piece
+we need to fix the variable corresponding to reference point placement to $(1,3)$ as below image illustrates:&lt;/p>
+&lt;p>&lt;img src="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/input-challenge.png"
+width="1088"
+height="373"
+srcset="https://serkankalay.github.io/p/formulating-iq-fit-as-mip/input-challenge_hu4a830c7aaa9b82d6ec50aacbf4e095dc_133757_480x0_resize_box_3.png 480w, https://serkankalay.github.io/p/formulating-iq-fit-as-mip/input-challenge_hu4a830c7aaa9b82d6ec50aacbf4e095dc_133757_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="291"
+data-flex-basis="700px"
+>&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>First of all, kudos to Raf Peeters, for designing this brilliant game. Even though it was a fun
+practice to formulate it, to be honest, I prefer playing the challenges with my daughter
+and the hardest ones with my wife.
+Moreover, even though I formulated it as a mathematical
+optimization model, it is rather a feasibility problem since there&amp;rsquo;s no objective to optimize for.
+Formulating it as a constraint programming model can be also a good practice, to also touch upon constraint satisfaction phenomenon.&lt;/p></description></item><item><title>👋 Hello World (duh)</title><link>https://serkankalay.github.io/p/hello-world/</link><pubDate>Mon, 09 Oct 2023 00:00:00 +0000</pubDate><guid>https://serkankalay.github.io/p/hello-world/</guid><description>&lt;img src="https://serkankalay.github.io/p/hello-world/header.png" alt="Featured image of post 👋 Hello World (duh)" />&lt;p>I am Serkan.&lt;/p>
+&lt;p>I have always wanted to start writing about various things I observe, am curious about and/or have an opinion on.
+In most cases, these topics relate to mathematical optimization, which luckily is one of my -&lt;em>numerous&lt;/em>- passions but also my job (🤑).
+I am also interested in aviation, food and pretty much anything that is &lt;em>smart&lt;/em>.&lt;/p>
+&lt;p>I have worked in a handful of companies ranging from airlines (✈️) to online retailers (💈), and from
+consultancy (👔) to software product companies (🖥️).&lt;/p>
+&lt;p>I hold a PhD in large scale mathematical optimization and I have 10+ years of experience in building optimizer
+tools in different settings and with different duties.&lt;/p>
+&lt;p>I enjoy cracking tough problems with mathematical optimization (🧮)
+by enabling smart decision making. I also have interest in software engineering (⌨️).&lt;/p>
+&lt;p>Data scientists are usually focused
+on getting things done (🎯), &lt;em>which makes sense&lt;/em>. However, when developing an algorithm or modeling a problem,
+on top of technical knowledge, a data scientist needs to rely on creativity (💡) and capability to &lt;em>think differently&lt;/em>.
+The peace of mind that software craftsmanship (🛠️) provides is hence something you need, to &lt;em>solve&lt;/em> a problem.
+(Will definitely write a post about my view on &lt;em>solving a problem&lt;/em>).&lt;/p>
+&lt;p>I am planning to start with a frequency of at least 1 post per month, aiming for a sustainable output rate.
+I understand that content creation is a very sophisticated task, requiring high level of enthusiasm and discipline.
+Well, I believe I just challenged myself into it 😁&lt;/p>
+&lt;p>Stay tuned! 🧑🏻‍💻🏃🏻‍♂️&lt;/p>
+&lt;p>NB: I took the cover picture. This is a place from my daily walking path, and I &lt;em>try&lt;/em> to take
+the &lt;em>exact same&lt;/em> picture from the &lt;em>exact same&lt;/em> spot. Not sure what to do with those yet, but
+I am positive that I can make something beautiful out of it.&lt;/p></description></item></channel></rss>
